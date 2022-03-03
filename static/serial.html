@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Web Serial</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="term/xterm.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div style="height:100vh;width:100vw;display:flex;flex-flow:column;">
+      <div class="termlbl" style="overflow: scroll;">
+        <div style="background:#607D8B;padding: 5px;">
+          &nbsp&nbsp TTY: &nbsp
+          <button onclick="sendAction(MGR_ACTION_REQ.SCAN_TTY_PRT);">Scan</button>
+          <select id="ttyDevices"></select>
+          <select id="ttyBaudRates">
+            <option>100</option>
+            <option>9600</option>
+            <option>57600</option>
+            <option>115200</option>
+            <option>230400</option>
+            <option>460800</option>
+            <option selected>921600</option>
+            <option>1000000</option>
+            <option>2000000</option>
+            <option>3000000</option>
+            <option>4000000</option>
+            <option>5000000</option>
+            <option>6000000</option>
+            <option>7000000</option>
+            <option>8000000</option>
+            <option>9000000</option>
+            <option>10000000</option>
+          </select>
+          <button onclick="startTTY()">Open</button>
+          <label id="ttyStatus"></label>
+        </div>
+        <div style="background:#3F51B5;padding: 5px;">
+          &nbsp&nbsp USB: &nbsp
+          <button onclick="sendAction(MGR_ACTION_REQ.SCAN_USB_PRT);">Scan</button>
+          <select id="usbDevices" onchange="loadUSBDevIfs()"></select>
+          &nbsp IF:<select id="usbDevInterfaces" onchange="loadUSBDevIfEps()"></select>
+          &nbsp RX:<select id="usbDevEndpointsRx"></select>
+          &nbsp TX:<select id="usbDevEndpointsTx"></select>
+          <button onclick="startUSB()">Open</button>
+          <label id="usbStatus"></label>
+        </div>
+      </div>
+      <div id="termCont" style="display:flex;flex:1;flex-flow:row;overflow:hidden;">
+      </div>
+    </div>
+    <script src="term/xterm.js"></script>
+    <script src="term/xterm-addon-fit.js"></script>
+    <script src="term/xterm-addon-webgl.js"></script>
+    <script src="element-resize-event.js"></script>
+    <script src="serial.js"></script>
+  </body>
+</html>
